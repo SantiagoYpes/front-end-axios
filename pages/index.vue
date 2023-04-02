@@ -113,12 +113,24 @@ export default {
             }
         }
         
-        const summary = `
+        let summary = `
         <p>Description: `+found.description+`</p><br>
         <p>Comics: `+found.comics.available+`</p><br>
         <p>Series: `+found.series.available+`</p><br>
         <p>Stories: `+found.stories.available+`</p><br>
-        <p>Events: `+found.events.available+`</p><br>`
+        <p>Events: `+found.events.available+`</p><br>
+        <p>Three Series about: `
+        console.log(found.series.items.length)
+        if (found.series.items.length<3) {
+            summary = summary+"There are not enough series"
+        }else{
+            for (let i = 0; i < 3; i++) {
+            const item = found.series.items[i];
+            summary = summary+(i+1)+") "+item.name+ "- "
+            }
+        }
+        
+        
         
         this.$swal.fire({
         imageUrl: found.thumbnail.path+'.'+found.thumbnail.extension,
