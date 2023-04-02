@@ -53,7 +53,7 @@
                   {{
                     character.description
                       ? character.description
-                      : 'The information about this character is not founded or is empty.'
+                      : 'The description about this character is not founded or is empty. We are working to keep all information up to date'
                   }}
                 </div>
               </v-card-text>
@@ -126,7 +126,7 @@ export default {
     },
     loadSumary(id: any) {
       const defaultValue =
-        'The information about this character is not founded or is empty.'
+        'The description about this character is not founded or is empty. We are working to keep all information up to date'
       const found = this.characters.find((character) => character.id == id)
       for (const prop in found) {
         if (found[prop] == '') {
@@ -168,6 +168,8 @@ export default {
         imageHeight: 250,
         title: found.name,
         html: summary,
+        confirmButtonColor: "black",
+        confirmButtonText:"Close"
       })
     },
   },
