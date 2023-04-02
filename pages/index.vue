@@ -174,4 +174,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.swal2-popup {
+  font-family: 'Roboto', sans-serif !important;
+  background: linear-gradient(to bottom, #e92428, yellow) !important;
+}
+</style>
