@@ -45,7 +45,7 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn color="#e92428" class="text-none" dark v-bind="attrs">
+                <v-btn color="#e92428" class="text-none" dark v-bind="attrs" @click="loadSumary(character.id)">
                   Explore
                 </v-btn>
               </v-card-actions>
@@ -103,7 +103,31 @@ export default {
         max = Math.floor(max)
         return Math.floor(Math.random() * (max - min) + min)
       }
-    }
+    },
+    loadSumary(id: any) {
+        const defaultValue = 'The information about this character is not founded or is empty.'
+        const found = this.characters.find(character => character.id == id)
+        for (const prop in found) {
+            if (found[prop] == '') {
+                found[prop] = defaultValue;
+            }
+        }
+        
+        const summary = `
+        <p>Description: `+found.description+`</p><br>
+        <p>Comics: `+found.comics.available+`</p><br>
+        <p>Series: `+found.series.available+`</p><br>
+        <p>Stories: `+found.stories.available+`</p><br>
+        <p>Events: `+found.events.available+`</p><br>`
+        
+        this.$swal.fire({
+        imageUrl: found.thumbnail.path+'.'+found.thumbnail.extension,
+        imageWidth: 400,
+        imageHeight: 250,
+        title: found.name,
+        html: summary
+      })
+    },
   },
 }
 </script>
