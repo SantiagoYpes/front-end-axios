@@ -1,6 +1,21 @@
 <template>
-  <div>
-    <v-btn @click="loadCharacters" :disabled="loading">Load Characters...</v-btn>
+  <div
+    style="
+      background-image: url('./fondo3.jpg');
+      background-position: center;
+      background-repeat: repeat;
+    "
+  >
+  <br>
+    <v-btn
+      @click="loadCharacters"
+      color="#e92428"
+      class="text-none"
+      dark
+      v-bind="attrs"
+      :disabled="loading"
+      >Load Characters...</v-btn
+    >
     <br />
     <span v-if="loading">Loading...</span>
     <v-progress-linear
@@ -8,7 +23,6 @@
       indeterminate
       color="cyan"
     ></v-progress-linear>
-
     <v-item-group multiple>
       <v-container>
         <v-row>
@@ -45,7 +59,13 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn color="#e92428" class="text-none" dark v-bind="attrs" @click="loadSumary(character.id)">
+                <v-btn
+                  color="#e92428"
+                  class="text-none"
+                  dark
+                  v-bind="attrs"
+                  @click="loadSumary(character.id)"
+                >
                   Explore
                 </v-btn>
               </v-card-actions>
@@ -105,39 +125,49 @@ export default {
       }
     },
     loadSumary(id: any) {
-        const defaultValue = 'The information about this character is not founded or is empty.'
-        const found = this.characters.find(character => character.id == id)
-        for (const prop in found) {
-            if (found[prop] == '') {
-                found[prop] = defaultValue;
-            }
+      const defaultValue =
+        'The information about this character is not founded or is empty.'
+      const found = this.characters.find((character) => character.id == id)
+      for (const prop in found) {
+        if (found[prop] == '') {
+          found[prop] = defaultValue
         }
-        
-        let summary = `
-        <p>Description: `+found.description+`</p><br>
-        <p>Comics: `+found.comics.available+`</p><br>
-        <p>Series: `+found.series.available+`</p><br>
-        <p>Stories: `+found.stories.available+`</p><br>
-        <p>Events: `+found.events.available+`</p><br>
+      }
+
+      let summary =
+        `
+        <p>Description: ` +
+        found.description +
+        `</p><br>
+        <p>Comics: ` +
+        found.comics.available +
+        `</p><br>
+        <p>Series: ` +
+        found.series.available +
+        `</p><br>
+        <p>Stories: ` +
+        found.stories.available +
+        `</p><br>
+        <p>Events: ` +
+        found.events.available +
+        `</p><br>
         <p>Three Series about: `
-        console.log(found.series.items.length)
-        if (found.series.items.length<3) {
-            summary = summary+"There are not enough series"
-        }else{
-            for (let i = 0; i < 3; i++) {
-            const item = found.series.items[i];
-            summary = summary+(i+1)+") "+item.name+ "- "
-            }
+      console.log(found.series.items.length)
+      if (found.series.items.length < 3) {
+        summary = summary + 'There are not enough series'
+      } else {
+        for (let i = 0; i < 3; i++) {
+          const item = found.series.items[i]
+          summary = summary + (i + 1) + ') ' + item.name + '- '
         }
-        
-        
-        
-        this.$swal.fire({
-        imageUrl: found.thumbnail.path+'.'+found.thumbnail.extension,
+      }
+
+      this.$swal.fire({
+        imageUrl: found.thumbnail.path + '.' + found.thumbnail.extension,
         imageWidth: 400,
         imageHeight: 250,
         title: found.name,
-        html: summary
+        html: summary,
       })
     },
   },
