@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn @click="loadAccounts" :disabled="loading">Load Characters...</v-btn>
+    <v-btn @click="loadCharacters" :disabled="loading">Load Characters...</v-btn>
     <br />
     <span v-if="loading">Loading...</span>
     <v-progress-linear
@@ -28,7 +28,7 @@
                 cover
               >
                 <v-card-title>
-                  <v-btn color="yellow">
+                  <v-btn color="yellow" @click="loadSumary(character.id)">
                     {{ character.name }}
                   </v-btn>
                 </v-card-title>
@@ -66,8 +66,8 @@ export default {
     }
   },
   methods: {
-    loadAccounts() {
-      console.log('Cargar cuentas')
+    loadCharacters() {
+      console.log('Cargar Personajes')
       const ts = 20
       const hash = '73505b649dce69cb8d6ace5b28ce5148'
       const apikey = '8b29bc630dd53f8cbe2ddb63722ffff0'
@@ -92,7 +92,7 @@ export default {
           console.log(results)
         })
         .catch((error) => {
-          alert('Ha ocurrido un error al cargar las cuentas')
+          alert('Ha ocurrido un error al cargar los personajes')
           console.log(error)
         })
         .finally(() => {
