@@ -71,6 +71,7 @@ export default {
       const ts = 20
       const hash = '73505b649dce69cb8d6ace5b28ce5148'
       const apikey = '8b29bc630dd53f8cbe2ddb63722ffff0'
+      const num = getRandomInt(0, 1543)
 
       const url =
         'https://gateway.marvel.com:443/v1/public/characters?ts=' +
@@ -78,7 +79,9 @@ export default {
         '&apikey=' +
         apikey +
         '&hash=' +
-        hash
+        hash +
+        '&offset=' +
+        num
 
       this.loading = true
       this.$axios
@@ -95,6 +98,11 @@ export default {
         .finally(() => {
           this.loading = false
         })
+      function getRandomInt(min: any, max: any) {
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min) + min)
+      }
     }
   },
 }
