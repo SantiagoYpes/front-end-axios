@@ -68,7 +68,7 @@ export default {
   methods: {
     loadCharacters() {
       console.log('Cargar Personajes')
-      const ts = 20
+      const ts = 21
       const hash = '73505b649dce69cb8d6ace5b28ce5148'
       const apikey = '8b29bc630dd53f8cbe2ddb63722ffff0'
       const num = getRandomInt(0, 1543)
